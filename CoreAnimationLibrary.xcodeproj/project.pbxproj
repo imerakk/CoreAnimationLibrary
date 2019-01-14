@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F2F621EC6E6800BA8309 /* AppDelegate.m */; };
-		F048F2FA21EC6E6800BA8309 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F2F921EC6E6800BA8309 /* ViewController.m */; };
 		F048F2FD21EC6E6800BA8309 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F2FB21EC6E6800BA8309 /* Main.storyboard */; };
 		F048F2FF21EC6E6900BA8309 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F048F2FE21EC6E6900BA8309 /* Assets.xcassets */; };
 		F048F30221EC6E6900BA8309 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F048F30021EC6E6900BA8309 /* LaunchScreen.storyboard */; };
 		F048F30521EC6E6900BA8309 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F30421EC6E6900BA8309 /* main.m */; };
 		F048F30F21EC6E6900BA8309 /* CoreAnimationLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F30E21EC6E6900BA8309 /* CoreAnimationLibraryTests.m */; };
 		F048F31A21EC6E6900BA8309 /* CoreAnimationLibraryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F31921EC6E6900BA8309 /* CoreAnimationLibraryUITests.m */; };
+		F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F32921EC720300BA8309 /* GTMainTableViewController.m */; };
+		F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F33421EC767E00BA8309 /* UIView+GTLayout.m */; };
+		F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F33721EC7C7B00BA8309 /* UIView+Animation.m */; };
+		F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */; };
+		F048F34221ECA3F400BA8309 /* GTCardOverTurnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +42,6 @@
 		F048F2F221EC6E6800BA8309 /* CoreAnimationLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreAnimationLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F2F521EC6E6800BA8309 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F048F2F621EC6E6800BA8309 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F048F2F821EC6E6800BA8309 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F048F2F921EC6E6800BA8309 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F048F2FC21EC6E6800BA8309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F048F2FE21EC6E6900BA8309 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F048F30121EC6E6900BA8309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,15 @@
 		F048F31521EC6E6900BA8309 /* CoreAnimationLibraryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreAnimationLibraryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F048F31921EC6E6900BA8309 /* CoreAnimationLibraryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreAnimationLibraryUITests.m; sourceTree = "<group>"; };
 		F048F31B21EC6E6900BA8309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F048F32821EC720300BA8309 /* GTMainTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMainTableViewController.h; sourceTree = "<group>"; };
+		F048F32921EC720300BA8309 /* GTMainTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMainTableViewController.m; sourceTree = "<group>"; };
+		F048F33321EC767E00BA8309 /* UIView+GTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GTLayout.h"; sourceTree = "<group>"; };
+		F048F33421EC767E00BA8309 /* UIView+GTLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GTLayout.m"; sourceTree = "<group>"; };
+		F048F33621EC7C7B00BA8309 /* UIView+Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Animation.h"; sourceTree = "<group>"; };
+		F048F33721EC7C7B00BA8309 /* UIView+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
+		F048F33E21ECA3F400BA8309 /* GTCardOverTurnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCardOverTurnViewController.h; sourceTree = "<group>"; };
+		F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTCardOverTurnViewController.m; sourceTree = "<group>"; };
+		F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTCardOverTurnViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +112,12 @@
 		F048F2F421EC6E6800BA8309 /* CoreAnimationLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				F048F33221EC75DA00BA8309 /* Category */,
+				F048F33121EC759700BA8309 /* Utility */,
+				F048F32B21EC753200BA8309 /* Modules */,
+				F048F32721EC71C600BA8309 /* CoreAnimation */,
 				F048F2F521EC6E6800BA8309 /* AppDelegate.h */,
 				F048F2F621EC6E6800BA8309 /* AppDelegate.m */,
-				F048F2F821EC6E6800BA8309 /* ViewController.h */,
-				F048F2F921EC6E6800BA8309 /* ViewController.m */,
 				F048F2FB21EC6E6800BA8309 /* Main.storyboard */,
 				F048F2FE21EC6E6900BA8309 /* Assets.xcassets */,
 				F048F30021EC6E6900BA8309 /* LaunchScreen.storyboard */,
@@ -130,6 +143,43 @@
 				F048F31B21EC6E6900BA8309 /* Info.plist */,
 			);
 			path = CoreAnimationLibraryUITests;
+			sourceTree = "<group>";
+		};
+		F048F32721EC71C600BA8309 /* CoreAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				F048F33621EC7C7B00BA8309 /* UIView+Animation.h */,
+				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
+			);
+			path = CoreAnimation;
+			sourceTree = "<group>";
+		};
+		F048F32B21EC753200BA8309 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				F048F32821EC720300BA8309 /* GTMainTableViewController.h */,
+				F048F32921EC720300BA8309 /* GTMainTableViewController.m */,
+				F048F33E21ECA3F400BA8309 /* GTCardOverTurnViewController.h */,
+				F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */,
+				F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		F048F33121EC759700BA8309 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F048F33221EC75DA00BA8309 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F048F33321EC767E00BA8309 /* UIView+GTLayout.h */,
+				F048F33421EC767E00BA8309 /* UIView+GTLayout.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F048F34221ECA3F400BA8309 /* GTCardOverTurnViewController.xib in Resources */,
 				F048F30221EC6E6900BA8309 /* LaunchScreen.storyboard in Resources */,
 				F048F2FF21EC6E6900BA8309 /* Assets.xcassets in Resources */,
 				F048F2FD21EC6E6800BA8309 /* Main.storyboard in Resources */,
@@ -262,8 +313,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F048F2FA21EC6E6800BA8309 /* ViewController.m in Sources */,
+				F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */,
 				F048F30521EC6E6900BA8309 /* main.m in Sources */,
+				F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */,
+				F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */,
+				F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */,
 				F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

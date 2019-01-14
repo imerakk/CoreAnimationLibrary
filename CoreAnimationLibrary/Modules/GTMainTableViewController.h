@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  GTMainTableViewController.h
 //  CoreAnimationLibrary
 //
 //  Created by liuchunxi on 2019/1/14.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface GTMainTableViewController : UITableViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
