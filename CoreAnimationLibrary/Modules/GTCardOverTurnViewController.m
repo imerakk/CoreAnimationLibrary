@@ -25,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.frontView addGestureRecognizer:tapGest];
 }
 
 - (IBAction)startAnimation:(id)sender {
@@ -39,6 +42,10 @@
                                            weakSelf.backView = weakSelf.frontView;
                                            weakSelf.frontView = tempView;
                                        }];
+}
+
+- (void)tap {
+    NSLog(@"tap");
 }
 
 @end

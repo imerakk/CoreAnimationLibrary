@@ -97,11 +97,19 @@ static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATrans
     front.hidden = NO;
     back.hidden = YES;
     
+    self.userInteractionEnabled = NO;
+    __weak typeof(self) weakSelf = self;
     [front overTurnAnimationWithFromRadians:0 toRadians:radians duration:duration / 2 orientation:orientation completion:^(BOOL success) {
         front.hidden = YES;
         back.hidden = NO;
-        [back overTurnAnimationWithFromRadians:-radians toRadians:0 duration:duration / 2 orientation:orientation completion:completion];
+        [back overTurnAnimationWithFromRadians:-radians toRadians:0 duration:duration / 2 orientation:orientation completion:^(BOOL success) {
+            if (completion) {
+                completion(success);
+            }
+            weakSelf.userInteractionEnabled = YES;
+        }];
     }];
 }
+
 
 @end
