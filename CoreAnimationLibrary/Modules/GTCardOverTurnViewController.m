@@ -8,6 +8,7 @@
 
 #import "GTCardOverTurnViewController.h"
 #import "UIView+Animation.h"
+#import "CALayer+Animation.h"
 
 @interface GTCardOverTurnViewController ()
 
@@ -31,17 +32,31 @@
 }
 
 - (IBAction)startAnimation:(id)sender {
-    __weak typeof(self) weakSelf = self;
-    [self.mainView cardOverTurnAnimationWithFront:self.frontView
-                                             back:self.backView
-                                         duration:[self.durationTextField.text doubleValue]
-                                      orientation:self.isVeritcalSwitch.isOn ? GTOrientationVeritcal : GTOrientationHorizontal isClockwise:self.isClockwiseSwitch.isOn
-                                       completion:^(BOOL success) {
-        NSLog(@"animation completion success %@", success ? @"success" : @"failed");
-                                           UIView *tempView = weakSelf.backView;
-                                           weakSelf.backView = weakSelf.frontView;
-                                           weakSelf.frontView = tempView;
-                                       }];
+    UIButton *btn = (UIButton *)sender;
+    if ([btn.titleLabel.text isEqualToString:@"start"]) {
+        __weak typeof(self) weakSelf = self;
+        [self.mainView cardOverTurnAnimationWithFront:self.frontView
+                                                 back:self.backView
+                                             duration:[self.durationTextField.text doubleValue]
+                                          orientation:self.isVeritcalSwitch.isOn ? GTOrientationVeritcal : GTOrientationHorizontal isClockwise:self.isClockwiseSwitch.isOn
+                                           completion:^(BOOL success) {
+                                               NSLog(@"animation completion %@", success ? @"success" : @"failed");
+                                               UIView *tempView = weakSelf.backView;
+                                               weakSelf.backView = weakSelf.frontView;
+                                               weakSelf.frontView = tempView;
+                                               
+                                               [btn setTitle:@"start" forState:UIControlStateNormal];
+                                           }];
+        [btn setTitle:@"pause" forState:UIControlStateNormal];
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"pause"]) {
+        [self.mainView.layer pauseAnimations];
+        [btn setTitle:@"resume" forState:UIControlStateNormal];
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"resume"]) {
+        [self.mainView.layer resumeAnimations];
+        [btn setTitle:@"pause" forState:UIControlStateNormal];
+    }
 }
 
 - (void)tap {

@@ -19,6 +19,10 @@
 		F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F33721EC7C7B00BA8309 /* UIView+Animation.m */; };
 		F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */; };
 		F048F34221ECA3F400BA8309 /* GTCardOverTurnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */; };
+		F097041321EEDBB600F11048 /* GTActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041221EEDBB600F11048 /* GTActivityIndicatorView.m */; };
+		F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041521EEDC5D00F11048 /* GTActivityIndicatorAnimation.m */; };
+		F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */; };
+		F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042021F0601B00F11048 /* CALayer+Animation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +66,14 @@
 		F048F33E21ECA3F400BA8309 /* GTCardOverTurnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCardOverTurnViewController.h; sourceTree = "<group>"; };
 		F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTCardOverTurnViewController.m; sourceTree = "<group>"; };
 		F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GTCardOverTurnViewController.xib; sourceTree = "<group>"; };
+		F097041121EEDBB600F11048 /* GTActivityIndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTActivityIndicatorView.h; sourceTree = "<group>"; };
+		F097041221EEDBB600F11048 /* GTActivityIndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTActivityIndicatorView.m; sourceTree = "<group>"; };
+		F097041421EEDC5D00F11048 /* GTActivityIndicatorAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTActivityIndicatorAnimation.h; sourceTree = "<group>"; };
+		F097041521EEDC5D00F11048 /* GTActivityIndicatorAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTActivityIndicatorAnimation.m; sourceTree = "<group>"; };
+		F097041721F027DF00F11048 /* GTActivityIndicatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTActivityIndicatorViewController.h; sourceTree = "<group>"; };
+		F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTActivityIndicatorViewController.m; sourceTree = "<group>"; };
+		F097041F21F0601B00F11048 /* CALayer+Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+Animation.h"; sourceTree = "<group>"; };
+		F097042021F0601B00F11048 /* CALayer+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +127,7 @@
 				F048F33221EC75DA00BA8309 /* Category */,
 				F048F33121EC759700BA8309 /* Utility */,
 				F048F32B21EC753200BA8309 /* Modules */,
-				F048F32721EC71C600BA8309 /* CoreAnimation */,
+				F048F32721EC71C600BA8309 /* Animations */,
 				F048F2F521EC6E6800BA8309 /* AppDelegate.h */,
 				F048F2F621EC6E6800BA8309 /* AppDelegate.m */,
 				F048F2FB21EC6E6800BA8309 /* Main.storyboard */,
@@ -145,13 +157,16 @@
 			path = CoreAnimationLibraryUITests;
 			sourceTree = "<group>";
 		};
-		F048F32721EC71C600BA8309 /* CoreAnimation */ = {
+		F048F32721EC71C600BA8309 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				F097041021EEDAAE00F11048 /* LoadingAnimation */,
 				F048F33621EC7C7B00BA8309 /* UIView+Animation.h */,
 				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
+				F097041F21F0601B00F11048 /* CALayer+Animation.h */,
+				F097042021F0601B00F11048 /* CALayer+Animation.m */,
 			);
-			path = CoreAnimation;
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		F048F32B21EC753200BA8309 /* Modules */ = {
@@ -162,6 +177,8 @@
 				F048F33E21ECA3F400BA8309 /* GTCardOverTurnViewController.h */,
 				F048F33F21ECA3F400BA8309 /* GTCardOverTurnViewController.m */,
 				F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */,
+				F097041721F027DF00F11048 /* GTActivityIndicatorViewController.h */,
+				F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -180,6 +197,17 @@
 				F048F33421EC767E00BA8309 /* UIView+GTLayout.m */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		F097041021EEDAAE00F11048 /* LoadingAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				F097041121EEDBB600F11048 /* GTActivityIndicatorView.h */,
+				F097041221EEDBB600F11048 /* GTActivityIndicatorView.m */,
+				F097041421EEDC5D00F11048 /* GTActivityIndicatorAnimation.h */,
+				F097041521EEDC5D00F11048 /* GTActivityIndicatorAnimation.m */,
+			);
+			path = LoadingAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +341,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F097041321EEDBB600F11048 /* GTActivityIndicatorView.m in Sources */,
 				F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */,
 				F048F30521EC6E6900BA8309 /* main.m in Sources */,
+				F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */,
+				F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */,
 				F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */,
 				F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */,
 				F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */,
+				F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */,
 				F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,8 +19,6 @@ typedef NS_ENUM(NSUInteger, GTOrientation) {
 
 @interface UIView (Animation)
 
-- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL))completion;
-
 @end
 
 

@@ -8,6 +8,7 @@
 
 #import "GTMainTableViewController.h"
 #import "GTCardOverTurnViewController.h"
+#import "GTActivityIndicatorViewController.h"
 
 @interface GTMainTableViewController ()
 
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     
     self.title = @"CoreAnimation";
-    self.dataSource = @[@"卡片翻转"];
+    self.dataSource = @[@"CardOverTurn", @"ActivityIndicator"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"reuse"];
 }
@@ -53,6 +54,13 @@
         case 0:
         {
             GTCardOverTurnViewController *vc = [[GTCardOverTurnViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+            
+        case 1:
+        {
+            GTActivityIndicatorViewController *vc = [[GTActivityIndicatorViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

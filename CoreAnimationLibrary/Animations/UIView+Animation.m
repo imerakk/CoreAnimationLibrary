@@ -7,6 +7,7 @@
 //
 
 #import "UIView+Animation.h"
+#import "CALayer+Animation.h"
 
 static const CGFloat kTransformM34 = -1 / 500.0;
 
@@ -19,43 +20,7 @@ static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATrans
     return animation;
 }
 
-
-@interface _GTAnimationDelegate : NSObject <CAAnimationDelegate>
-
-@property (nonatomic, copy) void (^block)(BOOL);
-
-- (instancetype)initWithBlock:(void (^)(BOOL))block;
-
-@end
-
-@implementation _GTAnimationDelegate
-
-- (instancetype)initWithBlock:(void (^)(BOOL))block {
-    self = [super init];
-    if (self) {
-        self.block = block;
-    }
-    
-    return self;
-}
-
-#pragma mark - CAAnimationDelegate
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    if (self.block) {
-        self.block(flag);
-    }
-}
-
-@end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation UIView (Animation)
-
-- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL))completion {
-    _GTAnimationDelegate *animationDelegate = [[_GTAnimationDelegate alloc] initWithBlock:completion];
-    animation.delegate = animationDelegate;
-    [self.layer addAnimation:animation forKey:nil];
-}
 
 @end
 
@@ -81,7 +46,7 @@ static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATrans
     };
     
     CABasicAnimation *animation = GTRotateAnimation(transformFactory(fromRadians), transformFactory(toRadians), duration);
-    [self startAnimation:animation completion:completion];
+    [self.layer startAnimation:animation completion:completion];
 }
 
 - (void)cardOverTurnAnimationWithFront:(UIView *)front
@@ -90,6 +55,8 @@ static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATrans
                            orientation:(GTOrientation)orientation
                            isClockwise:(BOOL)isClockwise
                             completion:(void (^)(BOOL))completion {
+    NSAssert(front.superview == back.superview, @"front and back must be subview of self");
+    
     CGFloat radians = isClockwise ? M_PI_2 : -M_PI_2;
     
     front.layer.doubleSided = NO;
