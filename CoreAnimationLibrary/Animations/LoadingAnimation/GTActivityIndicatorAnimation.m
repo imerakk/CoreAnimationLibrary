@@ -266,23 +266,23 @@
 }
 
 - (void)startAnimationForBallRound {
-    [self startAnimationForBallRoundWithSections:1];
+    [self startAnimationForBallRoundWithSections:1 totalCount:20];
 }
 
 - (void)startAnimationForBallRoundDouble {
-    [self startAnimationForBallRoundWithSections:2];
+    [self startAnimationForBallRoundWithSections:2 totalCount:20];
 }
 
 - (void)startAnimationForBallRoundThree {
-    [self startAnimationForBallRoundWithSections:3];
+    [self startAnimationForBallRoundWithSections:3 totalCount:100];
 }
 
-- (void)startAnimationForBallRoundWithSections:(NSUInteger)sections {
+- (void)startAnimationForBallRoundWithSections:(NSUInteger)sections totalCount:(NSInteger)totalCount {
     if (sections == 0) {
         return;
     }
     
-    NSInteger count = 20;
+    NSInteger count = totalCount;
     CGFloat circleSize = self.size / 8;
     CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
     CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
