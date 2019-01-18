@@ -13,7 +13,7 @@ static const CGFloat kTransformM34 = -1 / 500.0;
 
 static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATransform3D toTransform, NSTimeInterval duration) {
     CABasicAnimation *animation = [CABasicAnimation animation];
-    animation.keyPath = @"transform";
+    animation.keyPath = kCAAnimationKeyPathTransform;
     animation.fromValue = [NSValue valueWithCATransform3D:formTransform];
     animation.toValue = [NSValue valueWithCATransform3D:toTransform];
     animation.duration = duration;

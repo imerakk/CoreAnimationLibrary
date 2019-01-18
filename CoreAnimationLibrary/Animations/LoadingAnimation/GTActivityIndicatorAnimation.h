@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+//form https://connoratherton.com/loaders
+
 typedef NS_ENUM(NSInteger, GTActivityIndicatorAnimationType) {
-    GTActivityIndicatorAnimationTypeThreeDots
+    GTActivityIndicatorAnimationTypeThreeDots,
+    GTActivityIndicatorAnimationTypeBallBounces,
+    GTActivityIndicatorAnimationTypeBallRotation,
+    GTActivityIndicatorAnimationTypeBallTrianglePath,
+    GTActivityIndicatorAnimationTypeBallGridPulse,
+    GTActivityIndicatorAnimationTypeBallRound,
+    GTActivityIndicatorAnimationTypeBallRoundDouble,
+    GTActivityIndicatorAnimationTypeBallRoundThree
 };
 
 NS_ASSUME_NONNULL_BEGIN

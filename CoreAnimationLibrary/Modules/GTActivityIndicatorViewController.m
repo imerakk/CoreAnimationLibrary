@@ -10,6 +10,7 @@
 #import "GTActivityIndicatorView.h"
 #import "UIView+GTLayout.h"
 
+
 @interface GTActivityIndicatorViewController ()
 
 @property (nonatomic, strong) NSMutableArray *indicatorViews;
@@ -29,7 +30,14 @@
 }
 
 - (void)setupIndicators {
-    NSArray *indicatorTypes = @[@(GTActivityIndicatorAnimationTypeThreeDots)];
+    NSArray *indicatorTypes = @[@(GTActivityIndicatorAnimationTypeThreeDots),
+                                @(GTActivityIndicatorAnimationTypeBallBounces),
+                                @(GTActivityIndicatorAnimationTypeBallRotation),
+                                @(GTActivityIndicatorAnimationTypeBallTrianglePath),
+                                @(GTActivityIndicatorAnimationTypeBallGridPulse),
+                                @(GTActivityIndicatorAnimationTypeBallRound),
+                                @(GTActivityIndicatorAnimationTypeBallRoundDouble),
+                                @(GTActivityIndicatorAnimationTypeBallRoundThree)];
     self.indicatorViews = [NSMutableArray array];
     
     NSInteger count = 5;
