@@ -18,7 +18,14 @@ typedef NS_ENUM(NSInteger, GTActivityIndicatorAnimationType) {
     GTActivityIndicatorAnimationTypeBallGridPulse,
     GTActivityIndicatorAnimationTypeBallRound,
     GTActivityIndicatorAnimationTypeBallRoundDouble,
-    GTActivityIndicatorAnimationTypeBallRoundThree
+    GTActivityIndicatorAnimationTypeBallRoundThree,
+    GTActivityIndicatorAnimationTypeBallScaleMultiple,
+    GTActivityIndicatorAnimationTypeRipple,
+    GTActivityIndicatorAnimationTypeLineScale,
+    GTActivityIndicatorAnimationTypeLineScaleParty,
+    GTActivityIndicatorAnimationTypeLineScaleImpulse,
+    GTActivityIndicatorAnimationTypeLineScaleImpulseRapid,
+    GTActivityIndicatorAnimationTypeArcRotation
 };
 
 NS_ASSUME_NONNULL_BEGIN

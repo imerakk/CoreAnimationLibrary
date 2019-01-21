@@ -9,6 +9,7 @@
 #import "GTActivityIndicatorAnimation.h"
 #import "CALayer+Animation.h"
 #import <math.h>
+#import "GTTimingFunctionCurveGraphView.h"
 
 #define TIMING_FUNCTION(name) ([CAMediaTimingFunction functionWithName:name])
 
@@ -71,6 +72,34 @@
             
         case GTActivityIndicatorAnimationTypeBallRoundThree:
             [self startAnimationForBallRoundThree];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeBallScaleMultiple:
+            [self startAnimationForBallScaleMultiple];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeRipple:
+            [self startAnimationForRipple];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeLineScale:
+            [self startAnimationForLineScale];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeLineScaleParty:
+            [self startAnimationForLineScaleParty];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeLineScaleImpulse:
+            [self startAnimationForLineScaleImpulse];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeLineScaleImpulseRapid:
+            [self startAnimationForScaleImpulseRapid];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeArcRotation:
+            [self startAnimationForArcRotation];
             break;
     }
 }
@@ -266,11 +295,11 @@
 }
 
 - (void)startAnimationForBallRound {
-    [self startAnimationForBallRoundWithSections:1 totalCount:20];
+    [self startAnimationForBallRoundWithSections:1 totalCount:15];
 }
 
 - (void)startAnimationForBallRoundDouble {
-    [self startAnimationForBallRoundWithSections:2 totalCount:20];
+    [self startAnimationForBallRoundWithSections:2 totalCount:14];
 }
 
 - (void)startAnimationForBallRoundThree {
@@ -315,6 +344,252 @@
     }
 }
 
+- (void)startAnimationForBallScaleMultiple {
+    NSUInteger count = 4;
+    CGFloat animationDuration = 1.8;
+    CGFloat segments = 0.8;
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    replicatorLayer.instanceCount = count;
+    replicatorLayer.instanceDelay = 0.25;
+    [self.layer addSublayer:replicatorLayer];
+    
+    CALayer *ballLayer = [self createCircleWithFrame:replicatorLayer.bounds fillColor:self.tintColor strokeColor:self.tintColor];
+    ballLayer.transform = CATransform3DMakeScale(0.01, 0.01, 1);
+    [replicatorLayer addSublayer:ballLayer];
+    
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+    scaleAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionLinear)];
+    scaleAnimation.values = @[@0.0, @1.0, @1.0];
+    scaleAnimation.keyTimes = @[@0.0, @(segments), @1.0];
+    scaleAnimation.duration = animationDuration;
+    
+    CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animation];
+    opacityAnimation.keyPath = kCAAnimationKeyPathOpacity;
+    opacityAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionLinear)];
+    opacityAnimation.values = @[@1.0, @0.0, @0.0];
+    opacityAnimation.keyTimes = @[@0.0, @(segments), @1.0];
+    opacityAnimation.duration = animationDuration;
+    
+    CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
+    groupAnimation.animations = @[scaleAnimation, opacityAnimation];
+    groupAnimation.duration = animationDuration;
+    groupAnimation.repeatCount = HUGE_VALF;
+    groupAnimation.removedOnCompletion = NO;
+    [ballLayer addAnimation:groupAnimation forKey:nil];
+}
 
+- (void)startAnimationForRipple {
+    NSUInteger count = 3;
+    CGFloat animationDuration = 1.5;
+    CGFloat segments = 0.9;
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    replicatorLayer.instanceCount = count;
+    replicatorLayer.instanceDelay = 0.2;
+    [self.layer addSublayer:replicatorLayer];
+    
+    CAShapeLayer *ballLayer = [self createCircleWithFrame:replicatorLayer.bounds fillColor:[UIColor clearColor] strokeColor:self.tintColor];
+    ballLayer.lineWidth = 2;
+    ballLayer.transform = CATransform3DMakeScale(0.01, 0.01, 1);
+    [replicatorLayer addSublayer:ballLayer];
+    
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+    scaleAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionLinear)];
+    scaleAnimation.values = @[@0.0, @1.0, @1.0];
+    scaleAnimation.keyTimes = @[@0.0, @(segments), @1.0];
+    scaleAnimation.duration = animationDuration;
+    
+    CAKeyframeAnimation *opacityAnimation = [CAKeyframeAnimation animation];
+    opacityAnimation.keyPath = kCAAnimationKeyPathOpacity;
+    opacityAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionLinear)];
+    opacityAnimation.values = @[@1.0, @.6, @0.0];
+    opacityAnimation.keyTimes = @[@0.0, @(segments), @1.0];
+    opacityAnimation.duration = animationDuration;
+
+    CAAnimationGroup *groupAnimation = [CAAnimationGroup animation];
+    groupAnimation.animations = @[scaleAnimation, opacityAnimation];
+    groupAnimation.duration = animationDuration;
+    groupAnimation.repeatCount = HUGE_VALF;
+    groupAnimation.removedOnCompletion = NO;
+    [ballLayer addAnimation:groupAnimation forKey:nil];
+}
+
+- (void)startAnimationForLineScale {
+    NSInteger count = 5;
+    CGFloat animationDuration = 1.0;
+    CGFloat lineWidth = self.size / (count*2 - 1);
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    replicatorLayer.instanceCount = count;
+    replicatorLayer.instanceDelay = animationDuration / (count*2);
+    CATransform3D transform = CATransform3DMakeTranslation(lineWidth*2, 0, 0);
+    replicatorLayer.instanceTransform = transform;
+    [self.layer addSublayer:replicatorLayer];
+    
+    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    lineLayer.frame = CGRectMake(0, 0, lineWidth, self.size);
+    lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+    lineLayer.fillColor = self.tintColor.CGColor;
+    lineLayer.lineWidth = lineWidth;
+    [replicatorLayer addSublayer:lineLayer];
+    
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScaleY;
+    scaleAnimation.values = @[@1.0, @0.4, @1.0];
+    CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.2f :0.68f :0.18f :1.08f];
+    scaleAnimation.timingFunctions = @[timingFunction, timingFunction];
+    scaleAnimation.keyTimes = @[@0.0, @0.5, @1.0];
+    scaleAnimation.duration = animationDuration;
+    scaleAnimation.repeatCount = HUGE_VALF;
+    scaleAnimation.removedOnCompletion = NO;
+    
+    [lineLayer addAnimation:scaleAnimation forKey:nil];
+}
+
+- (void)startAnimationForLineScaleParty {
+    NSArray *animationDurations = @[@0.5, @1.1, @0.9, @0.7];
+    CGFloat lineWidth = self.size / (animationDurations.count*2 - 1);
+    
+    for (int i = 0; i < animationDurations.count; i++) {
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
+        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        lineLayer.fillColor = self.tintColor.CGColor;
+        lineLayer.lineWidth = lineWidth;
+        [self.layer addSublayer:lineLayer];
+        
+        CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+        scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+        scaleAnimation.values = @[@1.0, @0.5, @1.0];
+        scaleAnimation.keyTimes = @[@0.0, @0.5, @1.0];
+        scaleAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseIn)];
+        scaleAnimation.removedOnCompletion = NO;
+        scaleAnimation.duration = [animationDurations[i] floatValue];
+        scaleAnimation.repeatCount = HUGE_VALF;
+        [lineLayer addAnimation:scaleAnimation forKey:nil];
+    }
+}
+
+- (void)startAnimationForLineScaleImpulse {
+    CGFloat animationDuration = 1.0;
+    NSArray *beginTimes = @[@0.0, @0.2, @0.4, @0.2, @0.0];
+    CGFloat lineWidth = self.size / (beginTimes.count*2 - 1);
+    
+    for (int i = 0; i < beginTimes.count; i++) {
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
+        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        lineLayer.fillColor = self.tintColor.CGColor;
+        lineLayer.lineWidth = lineWidth;
+        [self.layer addSublayer:lineLayer];
+        
+        CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+        scaleAnimation.keyPath = kCAAnimationKeyPathScaleY;
+        scaleAnimation.values = @[@1.0, @0.3, @1.0];
+        scaleAnimation.keyTimes = @[@0.0, @0.5, @1.0];
+        CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.85f :0.25f :0.37f :0.85f];
+        scaleAnimation.timingFunctions = @[timingFunction, timingFunction];
+        scaleAnimation.removedOnCompletion = NO;
+        scaleAnimation.duration = animationDuration;
+        scaleAnimation.beginTime = [beginTimes[i] floatValue];
+        scaleAnimation.repeatCount = HUGE_VALF;
+        [lineLayer addAnimation:scaleAnimation forKey:nil];
+    }
+}
+
+- (void)startAnimationForScaleImpulseRapid {
+    CGFloat animationDuration = 0.9;
+    NSArray *beginTimes = @[@0.5, @0.25, @0.0, @0.25, @0.5];
+    CGFloat lineWidth = self.size / (beginTimes.count*2 - 1);
+
+    for (int i = 0; i < beginTimes.count; i++) {
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
+        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        lineLayer.fillColor = self.tintColor.CGColor;
+        lineLayer.lineWidth = lineWidth;
+        [self.layer addSublayer:lineLayer];
+
+        CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+        scaleAnimation.keyPath = kCAAnimationKeyPathScaleY;
+        scaleAnimation.values = @[@1.0, @0.3, @1.0];
+        scaleAnimation.keyTimes = @[@0.0, @0.8, @0.9];
+        CAMediaTimingFunction *timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.11f :0.49f :0.38f :0.78f];
+        scaleAnimation.timingFunctions = @[timingFunction, timingFunction];
+        scaleAnimation.removedOnCompletion = NO;
+        scaleAnimation.duration = animationDuration;
+        scaleAnimation.beginTime = [beginTimes[i] floatValue];
+        scaleAnimation.repeatCount = HUGE_VALF;
+        [lineLayer addAnimation:scaleAnimation forKey:nil];
+    }
+}
+
+- (void)startAnimationForArcRotation {
+    CAShapeLayer * (^circleLayerFactory)(CGRect, CGFloat, BOOL) = ^(CGRect frame, CGFloat startAngle, BOOL isReverses) {
+        CAShapeLayer *circleLayer = [CAShapeLayer layer];
+        circleLayer.frame = frame;
+        
+        CGFloat radius = frame.size.width*0.5;
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        [path addArcWithCenter:CGPointMake(radius, radius) radius:radius startAngle:startAngle endAngle:startAngle + M_PI_2 clockwise:YES];
+        [path moveToPoint:CGPointMake(radius + cos(startAngle + M_PI)*radius, radius + sin(startAngle + M_PI)*radius)];
+        [path addArcWithCenter:CGPointMake(radius, radius) radius:radius startAngle:startAngle+M_PI endAngle:startAngle+M_PI+M_PI_2 clockwise:YES];
+        circleLayer.path = path.CGPath;
+        circleLayer.fillColor = [UIColor clearColor].CGColor;
+        circleLayer.strokeColor = self.tintColor.CGColor;
+        circleLayer.lineWidth = 2;
+        
+        CGFloat animationDuration = 0.9;
+        CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+        scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+        scaleAnimation.values = @[@1.0, @0.6, @1.0];
+        scaleAnimation.keyTimes = @[@0.0, @0.5, @1.0];
+        scaleAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut)];
+        scaleAnimation.duration = animationDuration;
+        
+        CAKeyframeAnimation *rotationAnimation = [CAKeyframeAnimation animation];
+        rotationAnimation.keyPath = kCAAnimationKeyPathRotationZ;
+        rotationAnimation.values = isReverses ? @[@0.0, @(-M_PI), @(-M_PI*2)]: @[@0.0, @(M_PI), @(M_PI*2)];
+        rotationAnimation.keyTimes = @[@0.0, @0.5, @1.0];
+        rotationAnimation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut)];
+        rotationAnimation.duration = animationDuration;
+        
+        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+        animationGroup.animations = @[rotationAnimation, scaleAnimation];
+        animationGroup.duration = animationDuration;
+        animationGroup.repeatCount = HUGE_VALF;
+        animationGroup.removedOnCompletion = NO;
+        if (isReverses) {
+            CFTimeInterval currentLayerTime = [circleLayer convertTime:CACurrentMediaTime() fromLayer:nil];
+            animationGroup.beginTime = currentLayerTime - animationDuration*0.5;
+        }
+        
+        [circleLayer addAnimation:animationGroup forKey:nil];
+        return circleLayer;
+    };
+    
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    CAShapeLayer *bigCircleLayer = circleLayerFactory(CGRectMake(originX, originY, self.size, self.size), -M_PI/4, NO);
+    [self.layer addSublayer:bigCircleLayer];
+
+    CGFloat smallRadius = self.size * 0.4;
+    CGRect frame = CGRectMake((self.layer.frame.size.height - smallRadius)*0.5, (self.layer.frame.size.height - smallRadius)*0.5, smallRadius, smallRadius);
+    CAShapeLayer *smallCircleLayer = circleLayerFactory(frame, M_PI/4, YES);
+    [self.layer addSublayer:smallCircleLayer];
+
+}
 
 @end

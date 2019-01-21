@@ -23,6 +23,7 @@
 		F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041521EEDC5D00F11048 /* GTActivityIndicatorAnimation.m */; };
 		F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */; };
 		F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042021F0601B00F11048 /* CALayer+Animation.m */; };
+		F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTActivityIndicatorViewController.m; sourceTree = "<group>"; };
 		F097041F21F0601B00F11048 /* CALayer+Animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+Animation.h"; sourceTree = "<group>"; };
 		F097042021F0601B00F11048 /* CALayer+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
+		F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTTimingFunctionCurveGraphView.h; sourceTree = "<group>"; };
+		F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTTimingFunctionCurveGraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,8 @@
 				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
 				F097041F21F0601B00F11048 /* CALayer+Animation.h */,
 				F097042021F0601B00F11048 /* CALayer+Animation.m */,
+				F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */,
+				F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */,
 				F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */,
 				F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */,
+				F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */,
 				F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

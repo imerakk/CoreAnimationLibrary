@@ -37,13 +37,20 @@
                                 @(GTActivityIndicatorAnimationTypeBallGridPulse),
                                 @(GTActivityIndicatorAnimationTypeBallRound),
                                 @(GTActivityIndicatorAnimationTypeBallRoundDouble),
-                                @(GTActivityIndicatorAnimationTypeBallRoundThree)];
+                                @(GTActivityIndicatorAnimationTypeBallRoundThree),
+                                @(GTActivityIndicatorAnimationTypeBallScaleMultiple),
+                                @(GTActivityIndicatorAnimationTypeRipple),
+                                @(GTActivityIndicatorAnimationTypeLineScale),
+                                @(GTActivityIndicatorAnimationTypeLineScaleParty),
+                                @(GTActivityIndicatorAnimationTypeLineScaleImpulse),
+                                @(GTActivityIndicatorAnimationTypeLineScaleImpulseRapid),
+                                @(GTActivityIndicatorAnimationTypeArcRotation)];
     self.indicatorViews = [NSMutableArray array];
     
     NSInteger count = 5;
     CGFloat size = 50;
     CGFloat linePadding = (self.view.width - count * size) / (count + 1);
-    CGFloat rowPadding = 10;
+    CGFloat rowPadding = 20;
     
     for (int i=0; i<indicatorTypes.count; i++) {
         NSInteger row = i / 5;
