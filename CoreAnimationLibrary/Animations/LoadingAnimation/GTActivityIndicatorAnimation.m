@@ -7,7 +7,7 @@
 //
 
 #import "GTActivityIndicatorAnimation.h"
-#import "CALayer+Animation.h"
+#import "GTAnimationKeyPath.h"
 #import <math.h>
 #import "GTTimingFunctionCurveGraphView.h"
 
@@ -100,6 +100,22 @@
             
         case GTActivityIndicatorAnimationTypeArcRotation:
             [self startAnimationForArcRotation];
+            break;
+        
+        case GTActivityIndicatorAnimationTypeSquarePath:
+            [self startAnimationForSquarePath];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeTrianglePath:
+            [self startAnimationForTrianglePath];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeSquareTransform:
+            [self startAnimationForSquareTransform];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeEatCookie:
+            [self startAnimationForEatCookie];
             break;
     }
 }
@@ -484,7 +500,7 @@
 
 - (void)startAnimationForLineScaleImpulse {
     CGFloat animationDuration = 1.0;
-    NSArray *beginTimes = @[@0.0, @0.2, @0.4, @0.2, @0.0];
+    NSArray *beginTimes = @[@0.4, @0.2, @0.0, @0.2, @0.4];
     CGFloat lineWidth = self.size / (beginTimes.count*2 - 1);
     
     for (int i = 0; i < beginTimes.count; i++) {
@@ -503,7 +519,7 @@
         scaleAnimation.timingFunctions = @[timingFunction, timingFunction];
         scaleAnimation.removedOnCompletion = NO;
         scaleAnimation.duration = animationDuration;
-        scaleAnimation.beginTime = [beginTimes[i] floatValue];
+        scaleAnimation.beginTime = [lineLayer convertTime:CACurrentMediaTime() fromLayer:nil] + [beginTimes[i] floatValue];
         scaleAnimation.repeatCount = HUGE_VALF;
         [lineLayer addAnimation:scaleAnimation forKey:nil];
     }
@@ -530,7 +546,7 @@
         scaleAnimation.timingFunctions = @[timingFunction, timingFunction];
         scaleAnimation.removedOnCompletion = NO;
         scaleAnimation.duration = animationDuration;
-        scaleAnimation.beginTime = [beginTimes[i] floatValue];
+        scaleAnimation.beginTime = [lineLayer convertTime:CACurrentMediaTime() fromLayer:nil] + [beginTimes[i] floatValue];
         scaleAnimation.repeatCount = HUGE_VALF;
         [lineLayer addAnimation:scaleAnimation forKey:nil];
     }
@@ -589,7 +605,174 @@
     CGRect frame = CGRectMake((self.layer.frame.size.height - smallRadius)*0.5, (self.layer.frame.size.height - smallRadius)*0.5, smallRadius, smallRadius);
     CAShapeLayer *smallCircleLayer = circleLayerFactory(frame, M_PI/4, YES);
     [self.layer addSublayer:smallCircleLayer];
+}
 
+- (void)startAnimationForSquarePath {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    CATransform3D transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+    replicatorLayer.instanceTransform = transform;
+    replicatorLayer.instanceCount = 2;
+    [self.layer addSublayer:replicatorLayer];
+    
+    CGFloat squareSize = self.size / 5;
+    CALayer *squareLayer = [CALayer layer];
+    squareLayer.frame = CGRectMake(0, 0, squareSize, squareSize);
+    squareLayer.backgroundColor = self.tintColor.CGColor;
+    [replicatorLayer addSublayer:squareLayer];
+    
+    CGFloat animationDuration = 1.5;
+    NSArray *timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseInEaseOut)];
+    CAKeyframeAnimation *translationAnimation = [CAKeyframeAnimation animation];
+    translationAnimation.keyPath = kCAAnimationKeyPathTranslation;
+    translationAnimation.values = @[[NSValue valueWithCGSize:CGSizeZero],
+                         [NSValue valueWithCGSize:CGSizeMake(self.size - squareSize, 0)],
+                         [NSValue valueWithCGSize:CGSizeMake(self.size - squareSize, self.size - squareSize)],
+                         [NSValue valueWithCGSize:CGSizeMake(0, self.size - squareSize)],
+                         [NSValue valueWithCGSize:CGSizeZero]];
+    translationAnimation.keyTimes = @[@0.0, @0.25, @0.5, @0.75, @1.0];
+    translationAnimation.timingFunctions = timingFunctions;
+    translationAnimation.duration = animationDuration;
+    
+    CAKeyframeAnimation *rotationAnimation = [CAKeyframeAnimation animation];
+    rotationAnimation.keyPath = kCAAnimationKeyPathRotation;
+    rotationAnimation.values = @[@0.0, @(-M_PI*0.5), @(0), @(-M_PI*0.5), @(0)];
+    rotationAnimation.keyTimes = @[@0.0, @0.25, @0.5, @0.75, @1.0];
+    rotationAnimation.duration = animationDuration;
+    rotationAnimation.timingFunctions = timingFunctions;
+    
+    CAKeyframeAnimation *scaleAnimation = [CAKeyframeAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+    scaleAnimation.values = @[@1.0, @0.5, @1.0, @.5, @1.0];
+    scaleAnimation.keyTimes = @[@0.0, @0.25, @0.5, @0.75, @1.0];
+    scaleAnimation.duration = animationDuration;
+    scaleAnimation.timingFunctions = timingFunctions;
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[translationAnimation, rotationAnimation, scaleAnimation];
+    animationGroup.duration = animationDuration;
+    animationGroup.repeatCount = HUGE_VALF;
+    animationGroup.removedOnCompletion = NO;
+    
+    [squareLayer addAnimation:animationGroup forKey:nil];
+}
+
+- (void)startAnimationForTrianglePath {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    CATransform3D transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+    replicatorLayer.instanceTransform = transform;
+    replicatorLayer.instanceCount = 2;
+    [self.layer addSublayer:replicatorLayer];
+    
+    CGFloat circleWidth = self.size / 5;
+    CAShapeLayer *circleLayer = [self createCircleWithFrame:CGRectMake(self.size*0.5 - circleWidth*0.5, self.size*0.5 - circleWidth*0.5, circleWidth, circleWidth) fillColor:self.tintColor strokeColor:self.tintColor];
+    [replicatorLayer addSublayer:circleLayer];
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = kCAAnimationKeyPathTranslation;
+    
+    animation.values = @[[NSValue valueWithCGSize:CGSizeZero],
+                         [NSValue valueWithCGSize:CGSizeMake(-self.size*0.5*tan(M_PI/6), -self.size*0.5)],
+                         [NSValue valueWithCGSize:CGSizeMake(self.size*0.5*tan(M_PI/6), -self.size*0.5)],
+                         [NSValue valueWithCGSize:CGSizeZero]];
+    animation.keyTimes = @[@0.0, @0.33, @0.67, @1.0];
+    animation.duration = 0.8;
+    animation.repeatCount = HUGE_VALF;
+    animation.removedOnCompletion = NO;
+    [circleLayer addAnimation:animation forKey:nil];
+}
+
+- (void)startAnimationForSquareTransform {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CALayer *squareLayer = [CALayer layer];
+    squareLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    squareLayer.backgroundColor = self.tintColor.CGColor;
+    [self.layer addSublayer:squareLayer];
+    
+
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = kCAAnimationKeyPathTransform;
+    
+    CATransform3D transform = CATransform3DIdentity;
+    transform.m34 = -1 / 200.0;
+    CATransform3D transform1 = CATransform3DRotate(transform, -M_PI, 0, 1, 0);
+    CATransform3D transform2 = CATransform3DRotate(transform1, -M_PI, 1, 0, 0);
+    CATransform3D transform3 = CATransform3DRotate(transform2, -M_PI, 0, 1, 0);
+    CATransform3D transform4 = CATransform3DRotate(transform3, M_PI, 1, 0, 0);
+    
+    animation.values = @[[NSValue valueWithCATransform3D:transform],
+                         [NSValue valueWithCATransform3D:transform1],
+                         [NSValue valueWithCATransform3D:transform2],
+                         [NSValue valueWithCATransform3D:transform3],
+                         [NSValue valueWithCATransform3D:transform4],
+                         [NSValue valueWithCATransform3D:transform]];
+    animation.keyTimes = @[@0.0, @0.25, @0.5, @0.75, @1.0];
+    animation.repeatCount = HUGE_VALF;
+    animation.removedOnCompletion = NO;
+    animation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
+                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
+                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
+                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
+                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
+                                  ];
+    animation.duration = 3;
+    
+    [squareLayer addAnimation:animation forKey:nil];
+}
+
+- (void)startAnimationForEatCookie {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    for (int i=0; i<2; i++) {
+        CAShapeLayer *jawLayer = [CAShapeLayer layer];
+        jawLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+        CGFloat radius = self.size*0.5;
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        [path addArcWithCenter:CGPointMake(radius, radius) radius:radius startAngle:M_PI*0.25 + M_PI_2*i endAngle:M_PI*1.25 + M_PI_2*i clockwise:YES];
+        [path addLineToPoint:CGPointMake(radius, radius)];
+        [path closePath];
+        jawLayer.path = path.CGPath;
+        jawLayer.fillColor = self.tintColor.CGColor;
+        
+        [self.layer addSublayer:jawLayer];
+        
+        CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+        animation.keyPath = kCAAnimationKeyPathRotationZ;
+        animation.values = i == 0 ? @[@0, @(-M_PI*0.25), @(-M_PI*0.25), @0] : @[@0, @(M_PI*0.25), @(M_PI*0.25), @0];
+        animation.keyTimes = @[@0.0, @0.35, @0.65, @1.0];
+        animation.duration = 0.5;
+        animation.repeatCount = HUGE_VALF;
+        animation.removedOnCompletion = NO;
+        [jawLayer addAnimation:animation forKey:nil];
+    }
+    
+    CGFloat cookieWidth = self.size / 5;
+    CGFloat disance = self.size*0.7;
+    for (int i=0; i<2; i++) {
+        CGFloat X = self.size*0.5 - cookieWidth*0.5 + disance*(i + 1);
+        CGFloat Y = self.size*0.5 - cookieWidth*0.5;
+        CGRect frame = CGRectMake(X, Y, cookieWidth, cookieWidth);
+        CAShapeLayer *cookieLayer = [self createCircleWithFrame:frame fillColor:self.tintColor strokeColor:[UIColor clearColor]];
+        [self.layer addSublayer:cookieLayer];
+        
+        CABasicAnimation *animation = [CABasicAnimation animation];
+        animation.keyPath = kCAAnimationKeyPathTranslationX;
+        animation.byValue = @(-disance);
+        animation.duration = 0.4;
+        animation.repeatCount = HUGE_VALF;
+        animation.removedOnCompletion = NO;
+        [cookieLayer addAnimation:animation forKey:nil];
+    }
 }
 
 @end

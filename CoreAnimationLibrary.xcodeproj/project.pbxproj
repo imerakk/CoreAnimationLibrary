@@ -24,6 +24,7 @@
 		F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */; };
 		F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042021F0601B00F11048 /* CALayer+Animation.m */; };
 		F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */; };
+		F097042A21F6B97C00F11048 /* GTAnimationKeyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		F097042021F0601B00F11048 /* CALayer+Animation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animation.m"; sourceTree = "<group>"; };
 		F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTTimingFunctionCurveGraphView.h; sourceTree = "<group>"; };
 		F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTTimingFunctionCurveGraphView.m; sourceTree = "<group>"; };
+		F097042821F6B97C00F11048 /* GTAnimationKeyPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTAnimationKeyPath.h; sourceTree = "<group>"; };
+		F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTAnimationKeyPath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,8 @@
 				F097042021F0601B00F11048 /* CALayer+Animation.m */,
 				F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */,
 				F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */,
+				F097042821F6B97C00F11048 /* GTAnimationKeyPath.h */,
+				F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */,
 				F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */,
 				F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */,
+				F097042A21F6B97C00F11048 /* GTAnimationKeyPath.m in Sources */,
 				F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */,
 				F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */,
 				F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */,

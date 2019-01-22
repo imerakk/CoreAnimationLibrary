@@ -25,7 +25,11 @@ typedef NS_ENUM(NSInteger, GTActivityIndicatorAnimationType) {
     GTActivityIndicatorAnimationTypeLineScaleParty,
     GTActivityIndicatorAnimationTypeLineScaleImpulse,
     GTActivityIndicatorAnimationTypeLineScaleImpulseRapid,
-    GTActivityIndicatorAnimationTypeArcRotation
+    GTActivityIndicatorAnimationTypeArcRotation,
+    GTActivityIndicatorAnimationTypeSquarePath,
+    GTActivityIndicatorAnimationTypeTrianglePath,
+    GTActivityIndicatorAnimationTypeSquareTransform,
+    GTActivityIndicatorAnimationTypeEatCookie
 };
 
 NS_ASSUME_NONNULL_BEGIN

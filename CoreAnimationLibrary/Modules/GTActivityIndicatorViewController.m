@@ -44,7 +44,11 @@
                                 @(GTActivityIndicatorAnimationTypeLineScaleParty),
                                 @(GTActivityIndicatorAnimationTypeLineScaleImpulse),
                                 @(GTActivityIndicatorAnimationTypeLineScaleImpulseRapid),
-                                @(GTActivityIndicatorAnimationTypeArcRotation)];
+                                @(GTActivityIndicatorAnimationTypeArcRotation),
+                                @(GTActivityIndicatorAnimationTypeSquarePath),
+                                @(GTActivityIndicatorAnimationTypeTrianglePath),
+                                @(GTActivityIndicatorAnimationTypeSquareTransform),
+                                @(GTActivityIndicatorAnimationTypeEatCookie)];
     self.indicatorViews = [NSMutableArray array];
     
     NSInteger count = 5;

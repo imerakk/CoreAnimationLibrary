@@ -8,6 +8,7 @@
 
 #import "UIView+Animation.h"
 #import "CALayer+Animation.h"
+#import "GTAnimationKeyPath.h"
 
 static const CGFloat kTransformM34 = -1 / 500.0;
 
