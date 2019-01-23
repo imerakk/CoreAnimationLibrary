@@ -37,10 +37,10 @@ static CABasicAnimation * GTRotateAnimation(CATransform3D formTransform, CATrans
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = kTransformM34;
         if (orientation == GTOrientationHorizontal) {
-            transform =  CATransform3DRotate(transform, radians, 0, 1, 0);
+            transform =  CATransform3DRotate(transform, radians, 0.0, 1.0, 0.0);
         }
         else {
-            transform =  CATransform3DRotate(transform, radians, 1, 0, 0);
+            transform =  CATransform3DRotate(transform, radians, 1.0, 0.0, 0.0);
         }
         
         return transform;

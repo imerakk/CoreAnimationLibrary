@@ -696,37 +696,35 @@
     CALayer *squareLayer = [CALayer layer];
     squareLayer.frame = CGRectMake(originX, originY, self.size, self.size);
     squareLayer.backgroundColor = self.tintColor.CGColor;
+    squareLayer.allowsEdgeAntialiasing = YES;
     [self.layer addSublayer:squareLayer];
     
-
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    animation.keyPath = kCAAnimationKeyPathTransform;
-    
     CATransform3D transform = CATransform3DIdentity;
-    transform.m34 = -1 / 200.0;
-    CATransform3D transform1 = CATransform3DRotate(transform, -M_PI, 0, 1, 0);
-    CATransform3D transform2 = CATransform3DRotate(transform1, -M_PI, 1, 0, 0);
-    CATransform3D transform3 = CATransform3DRotate(transform2, -M_PI, 0, 1, 0);
-    CATransform3D transform4 = CATransform3DRotate(transform3, M_PI, 1, 0, 0);
-    
-    animation.values = @[[NSValue valueWithCATransform3D:transform],
-                         [NSValue valueWithCATransform3D:transform1],
-                         [NSValue valueWithCATransform3D:transform2],
-                         [NSValue valueWithCATransform3D:transform3],
-                         [NSValue valueWithCATransform3D:transform4],
-                         [NSValue valueWithCATransform3D:transform]];
-    animation.keyTimes = @[@0.0, @0.25, @0.5, @0.75, @1.0];
-    animation.repeatCount = HUGE_VALF;
-    animation.removedOnCompletion = NO;
-    animation.timingFunctions = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
-                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
-                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
-                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
-                                  TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut),
-                                  ];
-    animation.duration = 3;
-    
-    [squareLayer addAnimation:animation forKey:nil];
+    transform.m34 = - 1 / 300.0;
+    squareLayer.transform = transform;
+
+    CAMediaTimingFunction *fn = [CAMediaTimingFunction functionWithControlPoints:0.2 :0.78 :0.4 :0.9];
+    NSArray *fns = @[fn, fn, fn, fn];
+    CGFloat animationDuartion = 4.0;
+    CAKeyframeAnimation *rotateYAnimation = [CAKeyframeAnimation animation];
+    rotateYAnimation.keyPath = kCAAnimationKeyPathRotationY;
+    rotateYAnimation.values = @[@0.0, @(-M_PI), @(-M_PI), @(-M_PI*2), @(-M_PI*2)];
+    rotateYAnimation.duration = animationDuartion;
+    rotateYAnimation.timingFunctions = fns;
+
+    CAKeyframeAnimation *rotateXAnimation = [CAKeyframeAnimation animation];
+    rotateXAnimation.keyPath = kCAAnimationKeyPathRotationX;
+    rotateXAnimation.values = @[@0.0, @(0.0), @(-M_PI), @(-M_PI), @(-M_PI*2)];
+    rotateXAnimation.duration = animationDuartion;
+    rotateXAnimation.timingFunctions = fns;
+
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[rotateXAnimation, rotateYAnimation];
+    animationGroup.repeatCount = HUGE_VALF;
+    animationGroup.removedOnCompletion = NO;
+    animationGroup.duration = animationDuartion;
+
+    [squareLayer addAnimation:animationGroup forKey:nil];
 }
 
 - (void)startAnimationForEatCookie {
