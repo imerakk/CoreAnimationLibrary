@@ -113,6 +113,18 @@
         case GTActivityIndicatorAnimationTypeSquareTransform:
             [self startAnimationForSquareTransform];
             break;
+        
+        case GTActivityIndicatorAnimationTypeBallScale:
+            [self startAnimationForBallScale];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeCircleScale:
+            [self startAnimationForCircleScale];
+            break;
+            
+        case GTActivityIndicatorAnimationTypeRectangleRotation:
+            [self startAnimationForRectangleRotation];
+            break;
             
         case GTActivityIndicatorAnimationTypeEatCookie:
             [self startAnimationForEatCookie];
@@ -725,6 +737,103 @@
     animationGroup.duration = animationDuartion;
 
     [squareLayer addAnimation:animationGroup forKey:nil];
+}
+
+- (void)startAnimationForBallScale {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAShapeLayer *ballLayer = [self createCircleWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:self.tintColor strokeColor:self.tintColor];
+    ballLayer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1);
+    [self.layer addSublayer:ballLayer];
+    
+    CGFloat animationDuration = 1.0;
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+    scaleAnimation.fromValue = @0.1;
+    scaleAnimation.toValue = @1.0;
+    scaleAnimation.duration = animationDuration;
+    scaleAnimation.timingFunction = TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut);
+    
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animation];
+    opacityAnimation.keyPath = kCAAnimationKeyPathOpacity;
+    opacityAnimation.fromValue = @1.0;
+    opacityAnimation.toValue = @0.0;
+    opacityAnimation.duration = animationDuration;
+    opacityAnimation.timingFunction = TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut);
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[scaleAnimation, opacityAnimation];
+    animationGroup.duration = animationDuration;
+    animationGroup.repeatCount = HUGE_VALF;
+    animationGroup.removedOnCompletion = NO;
+    [ballLayer addAnimation:animationGroup forKey:nil];
+}
+
+- (void)startAnimationForCircleScale {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    
+    CAShapeLayer *ballLayer = [self createCircleWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:[UIColor clearColor] strokeColor:self.tintColor];
+    ballLayer.lineWidth = 2;
+    ballLayer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1);
+    [self.layer addSublayer:ballLayer];
+    
+    CGFloat animationDuration = 1.0;
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animation];
+    scaleAnimation.keyPath = kCAAnimationKeyPathScale;
+    scaleAnimation.fromValue = @0.1;
+    scaleAnimation.toValue = @1.0;
+    scaleAnimation.duration = animationDuration;
+    scaleAnimation.timingFunction = TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut);
+    
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animation];
+    opacityAnimation.keyPath = kCAAnimationKeyPathOpacity;
+    opacityAnimation.fromValue = @1.0;
+    opacityAnimation.toValue = @0.0;
+    opacityAnimation.duration = animationDuration;
+    opacityAnimation.timingFunction = TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut);
+    
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    animationGroup.animations = @[scaleAnimation, opacityAnimation];
+    animationGroup.duration = animationDuration;
+    animationGroup.repeatCount = HUGE_VALF;
+    animationGroup.removedOnCompletion = NO;
+    [ballLayer addAnimation:animationGroup forKey:nil];
+}
+
+- (void)startAnimationForRectangleRotation {
+    CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
+    CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
+    NSInteger count = 8;
+    CGFloat animationDuration = 1.0;
+
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.frame = CGRectMake(originX, originY, self.size, self.size);
+    CATransform3D transform = CATransform3DMakeRotation(-M_PI*2 / count, 0, 0, 1);
+    replicatorLayer.instanceTransform = transform;
+    replicatorLayer.instanceDelay = animationDuration / count;
+    replicatorLayer.instanceCount = count;
+    [self.layer addSublayer:replicatorLayer];
+
+    CAShapeLayer *rectLayer = [CAShapeLayer layer];
+    CGFloat rectWidth = self.size / 12;
+    CGFloat rectHeight = self.size / 3.5;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rectWidth, rectHeight) cornerRadius:rectWidth*0.5];
+    rectLayer.frame = CGRectMake(self.size*0.5 - rectWidth*0.5, 0, rectWidth, rectHeight);
+    rectLayer.path = path.CGPath;
+    rectLayer.fillColor = self.tintColor.CGColor;
+    [replicatorLayer addSublayer:rectLayer];
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    animation.keyPath = kCAAnimationKeyPathOpacity;
+    animation.values = @[@1.0, @0.1, @1.0];
+    animation.keyTimes = @[@0.0, @0.5, @1.0];
+    animation.duration = animationDuration;
+    animation.repeatCount = HUGE_VALF;
+    animation.removedOnCompletion = NO;
+    
+    [rectLayer addAnimation:animation forKey:nil];
 }
 
 - (void)startAnimationForEatCookie {

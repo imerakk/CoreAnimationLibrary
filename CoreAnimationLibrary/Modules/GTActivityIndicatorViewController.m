@@ -48,6 +48,9 @@
                                 @(GTActivityIndicatorAnimationTypeSquarePath),
                                 @(GTActivityIndicatorAnimationTypeTrianglePath),
                                 @(GTActivityIndicatorAnimationTypeSquareTransform),
+                                @(GTActivityIndicatorAnimationTypeBallScale),
+                                @(GTActivityIndicatorAnimationTypeCircleScale),
+                                @(GTActivityIndicatorAnimationTypeRectangleRotation),
                                 @(GTActivityIndicatorAnimationTypeEatCookie)];
     self.indicatorViews = [NSMutableArray array];
     
