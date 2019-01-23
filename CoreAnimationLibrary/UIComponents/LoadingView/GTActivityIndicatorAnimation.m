@@ -10,6 +10,7 @@
 #import "GTAnimationKeyPath.h"
 #import <math.h>
 #import "GTTimingFunctionCurveGraphView.h"
+#import "CAShapeLayer+CornRadius.h"
 
 #define TIMING_FUNCTION(name) ([CAMediaTimingFunction functionWithName:name])
 
@@ -132,19 +133,6 @@
     }
 }
 
-- (CAShapeLayer *)createCircleWithFrame:(CGRect)frame fillColor:(UIColor *)fillColor strokeColor:(UIColor *)strokeColor {
-    CAShapeLayer *layer = [CAShapeLayer layer];
-    layer.frame = frame;
-    
-    CGPoint center = CGPointMake(frame.size.width * 0.5, frame.size.height*0.5);
-    CGFloat radius = frame.size.width * 0.5;
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:0 endAngle:M_PI*2 clockwise:YES];
-    layer.path = path.CGPath;
-    layer.strokeColor = strokeColor.CGColor;
-    layer.fillColor = fillColor.CGColor;
-    return layer;
-}
-
 - (void)startAnimationForThreeDots {
     NSInteger count = 3;
     CGFloat circlePadding = 6.0;
@@ -162,9 +150,10 @@
     replicatorLayer.instanceCount = count;
     replicatorLayer.instanceDelay = animationDuration / (count*2);
     
-    CAShapeLayer *layer = [self createCircleWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
-                                            fillColor:self.tintColor
-                                          strokeColor:self.tintColor];
+    
+    CAShapeLayer *layer = [CAShapeLayer circleLayerWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
+                                                   fillColor:self.tintColor
+                                                 strokeColor:self.tintColor];
     [replicatorLayer addSublayer:layer];
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -195,9 +184,9 @@
     replicatorLayer.instanceCount = count;
     replicatorLayer.instanceDelay = animationDuration / (count*2);
     
-    CAShapeLayer *layer = [self createCircleWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
-                                            fillColor:self.tintColor
-                                          strokeColor:self.tintColor];
+    CAShapeLayer *layer = [CAShapeLayer circleLayerWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
+                                                   fillColor:self.tintColor
+                                                 strokeColor:self.tintColor];
     [replicatorLayer addSublayer:layer];
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -228,9 +217,9 @@
     replicatorLayer.instanceCount = count;
     replicatorLayer.instanceDelay = animationDuration / (count*2);
     
-    CAShapeLayer *layer = [self createCircleWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
-                                            fillColor:self.tintColor
-                                          strokeColor:self.tintColor];
+    CAShapeLayer *layer = [CAShapeLayer circleLayerWithFrame:CGRectMake(0, self.size*0.5 - circleSize*0.5, circleSize, circleSize)
+                                                   fillColor:self.tintColor
+                                                 strokeColor:self.tintColor];
     [replicatorLayer addSublayer:layer];
     
     NSArray *fns = @[TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut), TIMING_FUNCTION(kCAMediaTimingFunctionEaseOut)];
@@ -270,7 +259,7 @@
     [self.layer addSublayer:replicatorLayer];
     
     CGRect frame = CGRectMake(self.size*0.5 - circleSize*0.5, 0, circleSize, circleSize);
-    CALayer *dotLayer = [self createCircleWithFrame:frame fillColor:[UIColor clearColor] strokeColor:self.tintColor];
+    CALayer *dotLayer = [CAShapeLayer circleLayerWithFrame:frame fillColor:[UIColor clearColor] strokeColor:self.tintColor];
     [replicatorLayer addSublayer:dotLayer];
     
     CATransform3D transform = CATransform3DMakeRotation(M_PI*2/count, 0, 0, 1);
@@ -306,7 +295,7 @@
         NSInteger row = i / count;
         NSInteger line = i % count;
         CGRect frame = CGRectMake((circleSize + circlePadding)*line, (circleSize + circlePadding)*row, circleSize, circleSize);
-        CALayer *dotLayer = [self createCircleWithFrame:frame fillColor:self.tintColor strokeColor:self.tintColor];
+        CALayer *dotLayer = [CAShapeLayer circleLayerWithFrame:frame fillColor:self.tintColor strokeColor:self.tintColor];
         [self.layer addSublayer:dotLayer];
         
         CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -352,7 +341,7 @@
         [self.layer addSublayer:replicatorLayer];
         
         CGRect frame = CGRectMake(self.size*0.5-circleSize*0.5, 0, circleSize, circleSize);
-        CALayer *dotLayer = [self createCircleWithFrame:frame fillColor:self.tintColor strokeColor:self.tintColor];
+        CALayer *dotLayer = [CAShapeLayer circleLayerWithFrame:frame fillColor:self.tintColor strokeColor:self.tintColor];
         dotLayer.transform = CATransform3DMakeScale(0.01, 0.01, 0.01); //解决旋转衔接效果
         [replicatorLayer addSublayer:dotLayer];
         
@@ -385,7 +374,7 @@
     replicatorLayer.instanceDelay = 0.25;
     [self.layer addSublayer:replicatorLayer];
     
-    CALayer *ballLayer = [self createCircleWithFrame:replicatorLayer.bounds fillColor:self.tintColor strokeColor:self.tintColor];
+    CALayer *ballLayer = [CAShapeLayer circleLayerWithFrame:replicatorLayer.bounds fillColor:self.tintColor strokeColor:self.tintColor];
     ballLayer.transform = CATransform3DMakeScale(0.01, 0.01, 1);
     [replicatorLayer addSublayer:ballLayer];
     
@@ -424,7 +413,7 @@
     replicatorLayer.instanceDelay = 0.2;
     [self.layer addSublayer:replicatorLayer];
     
-    CAShapeLayer *ballLayer = [self createCircleWithFrame:replicatorLayer.bounds fillColor:[UIColor clearColor] strokeColor:self.tintColor];
+    CAShapeLayer *ballLayer = [CAShapeLayer circleLayerWithFrame:replicatorLayer.bounds fillColor:[UIColor clearColor] strokeColor:self.tintColor];
     ballLayer.lineWidth = 2;
     ballLayer.transform = CATransform3DMakeScale(0.01, 0.01, 1);
     [replicatorLayer addSublayer:ballLayer];
@@ -466,9 +455,7 @@
     replicatorLayer.instanceTransform = transform;
     [self.layer addSublayer:replicatorLayer];
     
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
-    lineLayer.frame = CGRectMake(0, 0, lineWidth, self.size);
-    lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+    CAShapeLayer *lineLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(0, 0, lineWidth, self.size) corners:UIRectCornerAllCorners radius:lineWidth*0.5];
     lineLayer.fillColor = self.tintColor.CGColor;
     lineLayer.lineWidth = lineWidth;
     [replicatorLayer addSublayer:lineLayer];
@@ -491,9 +478,7 @@
     CGFloat lineWidth = self.size / (animationDurations.count*2 - 1);
     
     for (int i = 0; i < animationDurations.count; i++) {
-        CAShapeLayer *lineLayer = [CAShapeLayer layer];
-        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
-        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        CAShapeLayer *lineLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(lineWidth*2*i, 0, lineWidth, self.size) corners:UIRectCornerAllCorners radius:lineWidth*0.5];
         lineLayer.fillColor = self.tintColor.CGColor;
         lineLayer.lineWidth = lineWidth;
         [self.layer addSublayer:lineLayer];
@@ -516,9 +501,7 @@
     CGFloat lineWidth = self.size / (beginTimes.count*2 - 1);
     
     for (int i = 0; i < beginTimes.count; i++) {
-        CAShapeLayer *lineLayer = [CAShapeLayer layer];
-        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
-        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        CAShapeLayer *lineLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(lineWidth*2*i, 0, lineWidth, self.size) corners:UIRectCornerAllCorners radius:lineWidth*0.5];
         lineLayer.fillColor = self.tintColor.CGColor;
         lineLayer.lineWidth = lineWidth;
         [self.layer addSublayer:lineLayer];
@@ -543,9 +526,7 @@
     CGFloat lineWidth = self.size / (beginTimes.count*2 - 1);
 
     for (int i = 0; i < beginTimes.count; i++) {
-        CAShapeLayer *lineLayer = [CAShapeLayer layer];
-        lineLayer.frame = CGRectMake(lineWidth*2*i, 0, lineWidth, self.size);
-        lineLayer.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, lineWidth, self.size) cornerRadius:lineWidth*0.5].CGPath;
+        CAShapeLayer *lineLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(lineWidth*2*i, 0, lineWidth, self.size) corners:UIRectCornerAllCorners radius:lineWidth*0.5];
         lineLayer.fillColor = self.tintColor.CGColor;
         lineLayer.lineWidth = lineWidth;
         [self.layer addSublayer:lineLayer];
@@ -684,7 +665,7 @@
     [self.layer addSublayer:replicatorLayer];
     
     CGFloat circleWidth = self.size / 5;
-    CAShapeLayer *circleLayer = [self createCircleWithFrame:CGRectMake(self.size*0.5 - circleWidth*0.5, self.size*0.5 - circleWidth*0.5, circleWidth, circleWidth) fillColor:self.tintColor strokeColor:self.tintColor];
+    CAShapeLayer *circleLayer = [CAShapeLayer circleLayerWithFrame:CGRectMake(self.size*0.5 - circleWidth*0.5, self.size*0.5 - circleWidth*0.5, circleWidth, circleWidth) fillColor:self.tintColor strokeColor:self.tintColor];
     [replicatorLayer addSublayer:circleLayer];
     
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
@@ -743,7 +724,7 @@
     CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
     CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
     
-    CAShapeLayer *ballLayer = [self createCircleWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:self.tintColor strokeColor:self.tintColor];
+    CAShapeLayer *ballLayer = [CAShapeLayer circleLayerWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:self.tintColor strokeColor:self.tintColor];
     ballLayer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1);
     [self.layer addSublayer:ballLayer];
     
@@ -774,7 +755,7 @@
     CGFloat originX = (self.layer.frame.size.width - self.size) / 2;
     CGFloat originY = (self.layer.frame.size.height - self.size) / 2;
     
-    CAShapeLayer *ballLayer = [self createCircleWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:[UIColor clearColor] strokeColor:self.tintColor];
+    CAShapeLayer *ballLayer = [CAShapeLayer circleLayerWithFrame:CGRectMake(originX, originY, self.size, self.size) fillColor:[UIColor clearColor] strokeColor:self.tintColor];
     ballLayer.lineWidth = 2;
     ballLayer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1);
     [self.layer addSublayer:ballLayer];
@@ -816,12 +797,9 @@
     replicatorLayer.instanceCount = count;
     [self.layer addSublayer:replicatorLayer];
 
-    CAShapeLayer *rectLayer = [CAShapeLayer layer];
     CGFloat rectWidth = self.size / 12;
     CGFloat rectHeight = self.size / 3.5;
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, rectWidth, rectHeight) cornerRadius:rectWidth*0.5];
-    rectLayer.frame = CGRectMake(self.size*0.5 - rectWidth*0.5, 0, rectWidth, rectHeight);
-    rectLayer.path = path.CGPath;
+    CAShapeLayer *rectLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(0, 0, rectWidth, rectHeight) corners:UIRectCornerAllCorners radius:rectWidth*0.5];
     rectLayer.fillColor = self.tintColor.CGColor;
     [replicatorLayer addSublayer:rectLayer];
     
@@ -869,7 +847,7 @@
         CGFloat X = self.size*0.5 - cookieWidth*0.5 + disance*(i + 1);
         CGFloat Y = self.size*0.5 - cookieWidth*0.5;
         CGRect frame = CGRectMake(X, Y, cookieWidth, cookieWidth);
-        CAShapeLayer *cookieLayer = [self createCircleWithFrame:frame fillColor:self.tintColor strokeColor:[UIColor clearColor]];
+        CAShapeLayer *cookieLayer = [CAShapeLayer circleLayerWithFrame:frame fillColor:self.tintColor strokeColor:[UIColor clearColor]];
         [self.layer addSublayer:cookieLayer];
         
         CABasicAnimation *animation = [CABasicAnimation animation];

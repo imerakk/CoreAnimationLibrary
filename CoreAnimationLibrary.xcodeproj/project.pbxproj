@@ -25,6 +25,7 @@
 		F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042021F0601B00F11048 /* CALayer+Animation.m */; };
 		F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */; };
 		F097042A21F6B97C00F11048 /* GTAnimationKeyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */; };
+		F097043121F85E9F00F11048 /* CAShapeLayer+CornRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = F097043021F85E9F00F11048 /* CAShapeLayer+CornRadius.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTTimingFunctionCurveGraphView.m; sourceTree = "<group>"; };
 		F097042821F6B97C00F11048 /* GTAnimationKeyPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTAnimationKeyPath.h; sourceTree = "<group>"; };
 		F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTAnimationKeyPath.m; sourceTree = "<group>"; };
+		F097042F21F85E9F00F11048 /* CAShapeLayer+CornRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+CornRadius.h"; sourceTree = "<group>"; };
+		F097043021F85E9F00F11048 /* CAShapeLayer+CornRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+CornRadius.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,10 +133,9 @@
 		F048F2F421EC6E6800BA8309 /* CoreAnimationLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				F048F33221EC75DA00BA8309 /* Category */,
-				F048F33121EC759700BA8309 /* Utility */,
 				F048F32B21EC753200BA8309 /* Modules */,
-				F048F32721EC71C600BA8309 /* Animations */,
+				F097042B21F858A400F11048 /* UIComponents */,
+				F048F32721EC71C600BA8309 /* AnimationTools */,
 				F048F2F521EC6E6800BA8309 /* AppDelegate.h */,
 				F048F2F621EC6E6800BA8309 /* AppDelegate.m */,
 				F048F2FB21EC6E6800BA8309 /* Main.storyboard */,
@@ -163,20 +165,15 @@
 			path = CoreAnimationLibraryUITests;
 			sourceTree = "<group>";
 		};
-		F048F32721EC71C600BA8309 /* Animations */ = {
+		F048F32721EC71C600BA8309 /* AnimationTools */ = {
 			isa = PBXGroup;
 			children = (
-				F097041021EEDAAE00F11048 /* LoadingAnimation */,
-				F048F33621EC7C7B00BA8309 /* UIView+Animation.h */,
-				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
-				F097041F21F0601B00F11048 /* CALayer+Animation.h */,
-				F097042021F0601B00F11048 /* CALayer+Animation.m */,
-				F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */,
-				F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */,
+				F097043321F85EBE00F11048 /* ViewCategory */,
+				F097043221F85EA900F11048 /* LayerCategory */,
 				F097042821F6B97C00F11048 /* GTAnimationKeyPath.h */,
 				F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */,
 			);
-			path = Animations;
+			path = AnimationTools;
 			sourceTree = "<group>";
 		};
 		F048F32B21EC753200BA8309 /* Modules */ = {
@@ -193,23 +190,7 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		F048F33121EC759700BA8309 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		F048F33221EC75DA00BA8309 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				F048F33321EC767E00BA8309 /* UIView+GTLayout.h */,
-				F048F33421EC767E00BA8309 /* UIView+GTLayout.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		F097041021EEDAAE00F11048 /* LoadingAnimation */ = {
+		F097041021EEDAAE00F11048 /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
 				F097041121EEDBB600F11048 /* GTActivityIndicatorView.h */,
@@ -217,7 +198,39 @@
 				F097041421EEDC5D00F11048 /* GTActivityIndicatorAnimation.h */,
 				F097041521EEDC5D00F11048 /* GTActivityIndicatorAnimation.m */,
 			);
-			path = LoadingAnimation;
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
+		F097042B21F858A400F11048 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				F097041021EEDAAE00F11048 /* LoadingView */,
+				F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */,
+				F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		F097043221F85EA900F11048 /* LayerCategory */ = {
+			isa = PBXGroup;
+			children = (
+				F097041F21F0601B00F11048 /* CALayer+Animation.h */,
+				F097042021F0601B00F11048 /* CALayer+Animation.m */,
+				F097042F21F85E9F00F11048 /* CAShapeLayer+CornRadius.h */,
+				F097043021F85E9F00F11048 /* CAShapeLayer+CornRadius.m */,
+			);
+			path = LayerCategory;
+			sourceTree = "<group>";
+		};
+		F097043321F85EBE00F11048 /* ViewCategory */ = {
+			isa = PBXGroup;
+			children = (
+				F048F33321EC767E00BA8309 /* UIView+GTLayout.h */,
+				F048F33421EC767E00BA8309 /* UIView+GTLayout.m */,
+				F048F33621EC7C7B00BA8309 /* UIView+Animation.h */,
+				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
+			);
+			path = ViewCategory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +367,7 @@
 				F097041321EEDBB600F11048 /* GTActivityIndicatorView.m in Sources */,
 				F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */,
 				F048F30521EC6E6900BA8309 /* main.m in Sources */,
+				F097043121F85E9F00F11048 /* CAShapeLayer+CornRadius.m in Sources */,
 				F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */,
 				F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */,
 				F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */,
