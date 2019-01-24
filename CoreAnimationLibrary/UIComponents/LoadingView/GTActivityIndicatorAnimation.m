@@ -799,7 +799,7 @@
 
     CGFloat rectWidth = self.size / 12;
     CGFloat rectHeight = self.size / 3.5;
-    CAShapeLayer *rectLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(0, 0, rectWidth, rectHeight) corners:UIRectCornerAllCorners radius:rectWidth*0.5];
+    CAShapeLayer *rectLayer = [CAShapeLayer shapeLayerWithFrame:CGRectMake(self.size*0.5 - rectWidth*0.5, 0, rectWidth, rectHeight) corners:UIRectCornerAllCorners radius:rectWidth*0.5];
     rectLayer.fillColor = self.tintColor.CGColor;
     [replicatorLayer addSublayer:rectLayer];
     
