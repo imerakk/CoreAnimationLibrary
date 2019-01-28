@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CALayer (Animation)
 
-- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL))completion;
+- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL success))completion;
 - (void)pauseAnimations;
 - (void)resumeAnimations;
 

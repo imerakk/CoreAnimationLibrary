@@ -26,6 +26,9 @@
 		F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */; };
 		F097042A21F6B97C00F11048 /* GTAnimationKeyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */; };
 		F097043121F85E9F00F11048 /* CAShapeLayer+CornRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = F097043021F85E9F00F11048 /* CAShapeLayer+CornRadius.m */; };
+		F097043C21FEB06200F11048 /* GTCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F097043B21FEB06200F11048 /* GTCircleView.m */; };
+		F097043F21FEB6AE00F11048 /* GTCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F097043E21FEB6AE00F11048 /* GTCircleViewController.m */; };
+		F097044321FECD3400F11048 /* GTTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = F097044121FECD3400F11048 /* GTTimer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,12 @@
 		F097042921F6B97C00F11048 /* GTAnimationKeyPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTAnimationKeyPath.m; sourceTree = "<group>"; };
 		F097042F21F85E9F00F11048 /* CAShapeLayer+CornRadius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+CornRadius.h"; sourceTree = "<group>"; };
 		F097043021F85E9F00F11048 /* CAShapeLayer+CornRadius.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+CornRadius.m"; sourceTree = "<group>"; };
+		F097043A21FEB06200F11048 /* GTCircleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCircleView.h; sourceTree = "<group>"; };
+		F097043B21FEB06200F11048 /* GTCircleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTCircleView.m; sourceTree = "<group>"; };
+		F097043D21FEB6AE00F11048 /* GTCircleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCircleViewController.h; sourceTree = "<group>"; };
+		F097043E21FEB6AE00F11048 /* GTCircleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTCircleViewController.m; sourceTree = "<group>"; };
+		F097044121FECD3400F11048 /* GTTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTTimer.m; sourceTree = "<group>"; };
+		F097044221FECD3400F11048 /* GTTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTTimer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +145,7 @@
 				F048F32B21EC753200BA8309 /* Modules */,
 				F097042B21F858A400F11048 /* UIComponents */,
 				F048F32721EC71C600BA8309 /* AnimationTools */,
+				F097044021FEB77400F11048 /* GeneralTools */,
 				F048F2F521EC6E6800BA8309 /* AppDelegate.h */,
 				F048F2F621EC6E6800BA8309 /* AppDelegate.m */,
 				F048F2FB21EC6E6800BA8309 /* Main.storyboard */,
@@ -186,6 +196,8 @@
 				F048F34021ECA3F400BA8309 /* GTCardOverTurnViewController.xib */,
 				F097041721F027DF00F11048 /* GTActivityIndicatorViewController.h */,
 				F097041821F027DF00F11048 /* GTActivityIndicatorViewController.m */,
+				F097043D21FEB6AE00F11048 /* GTCircleViewController.h */,
+				F097043E21FEB6AE00F11048 /* GTCircleViewController.m */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -204,6 +216,7 @@
 		F097042B21F858A400F11048 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				F097043921FEAFAB00F11048 /* CircleView */,
 				F097041021EEDAAE00F11048 /* LoadingView */,
 				F097042221F5BD1100F11048 /* GTTimingFunctionCurveGraphView.h */,
 				F097042321F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m */,
@@ -231,6 +244,24 @@
 				F048F33721EC7C7B00BA8309 /* UIView+Animation.m */,
 			);
 			path = ViewCategory;
+			sourceTree = "<group>";
+		};
+		F097043921FEAFAB00F11048 /* CircleView */ = {
+			isa = PBXGroup;
+			children = (
+				F097043A21FEB06200F11048 /* GTCircleView.h */,
+				F097043B21FEB06200F11048 /* GTCircleView.m */,
+			);
+			path = CircleView;
+			sourceTree = "<group>";
+		};
+		F097044021FEB77400F11048 /* GeneralTools */ = {
+			isa = PBXGroup;
+			children = (
+				F097044221FECD3400F11048 /* GTTimer.h */,
+				F097044121FECD3400F11048 /* GTTimer.m */,
+			);
+			path = GeneralTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F097044321FECD3400F11048 /* GTTimer.m in Sources */,
 				F097041321EEDBB600F11048 /* GTActivityIndicatorView.m in Sources */,
 				F048F33821EC7C7B00BA8309 /* UIView+Animation.m in Sources */,
 				F048F30521EC6E6900BA8309 /* main.m in Sources */,
@@ -371,10 +403,12 @@
 				F097041921F027DF00F11048 /* GTActivityIndicatorViewController.m in Sources */,
 				F097042121F0601B00F11048 /* CALayer+Animation.m in Sources */,
 				F048F34121ECA3F400BA8309 /* GTCardOverTurnViewController.m in Sources */,
+				F097043C21FEB06200F11048 /* GTCircleView.m in Sources */,
 				F048F33521EC767E00BA8309 /* UIView+GTLayout.m in Sources */,
 				F048F32A21EC720300BA8309 /* GTMainTableViewController.m in Sources */,
 				F097042A21F6B97C00F11048 /* GTAnimationKeyPath.m in Sources */,
 				F097041621EEDC5D00F11048 /* GTActivityIndicatorAnimation.m in Sources */,
+				F097043F21FEB6AE00F11048 /* GTCircleViewController.m in Sources */,
 				F097042421F5BD1100F11048 /* GTTimingFunctionCurveGraphView.m in Sources */,
 				F048F2F721EC6E6800BA8309 /* AppDelegate.m in Sources */,
 			);

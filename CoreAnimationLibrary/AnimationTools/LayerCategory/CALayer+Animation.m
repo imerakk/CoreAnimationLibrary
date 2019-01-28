@@ -38,7 +38,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 @implementation CALayer (Animation)
 
-- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL))completion {
+- (void)startAnimation:(CAAnimation *)animation completion:(void (^)(BOOL success))completion {
     _GTAnimationDelegate *animationDelegate = [[_GTAnimationDelegate alloc] initWithBlock:completion];
     animation.delegate = animationDelegate;
     [self addAnimation:animation forKey:nil];

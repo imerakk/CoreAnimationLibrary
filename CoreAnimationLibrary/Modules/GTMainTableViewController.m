@@ -9,6 +9,7 @@
 #import "GTMainTableViewController.h"
 #import "GTCardOverTurnViewController.h"
 #import "GTActivityIndicatorViewController.h"
+#import "GTCircleViewController.h"
 
 @interface GTMainTableViewController ()
 
@@ -22,7 +23,7 @@
     [super viewDidLoad];
     
     self.title = @"CoreAnimation";
-    self.dataSource = @[@"CardOverTurn", @"ActivityIndicator"];
+    self.dataSource = @[@"卡片翻转", @"活动指示器", @"圆环动画"];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"reuse"];
 }
@@ -61,6 +62,13 @@
         case 1:
         {
             GTActivityIndicatorViewController *vc = [[GTActivityIndicatorViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+            
+        case 2:
+        {
+            GTCircleViewController *vc = [[GTCircleViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
