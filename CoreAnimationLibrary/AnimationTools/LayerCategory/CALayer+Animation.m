@@ -56,7 +56,7 @@
     self.timeOffset = 0;
     self.speed = 1.0;
     
-    CFTimeInterval timeSincePause = [self convertTime:CACurrentMediaTime() toLayer:nil] - pauseTime;
+    CFTimeInterval timeSincePause = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pauseTime;
     self.timeOffset = -timeSincePause;
 }
 
